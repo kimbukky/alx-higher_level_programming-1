@@ -1,39 +1,32 @@
 #!/usr/bin/python3
-"""Module 12-student.
-Creates a Student class.
-"""
+'''task 12 module'''
 
 
-class Student:
-    """Class that defines a student.
-    Public attributes:
-        - first_name
-        - last_name
-        - age
-    Public method to_json().
-    """
+def pascal_triangle(n):
+    '''returns a list of lists of integers representing
+    the Pascal’s triangle of n
+    '''
+    if n <= 0:
+        return list()
 
-    def __init__(self, first_name, last_name, age):
-        """Initializes the Student instance."""
+    tr = []
+    for line in range(0, n):
+        # Every line has number of
+        # integers equal to line
+        # number
+        tmp = []
+        for i in range(0, line + 1):
+            tmp.append(magic(line, i))
+        tr.append(tmp)
+    return tr
 
-        self.first_name = first_name
-        self.last_name = last_name
-        self.age = age
 
-    def to_json(self, attrs=None):
-        """Retrieves a dictionary representation
-        of a Student instance.
-
-        Args:
-            - attrs: list of attributes
-
-        Returns: the dict representation of the instance.
-        """
-
-        my_dict = dict()
-        if type(attrs) is list and all(type(x) is str for x in attrs):
-            for x in attrs:
-                if x in self.__dict__:
-                    my_dict.update({x: self.__dict__[x]})
-            return my_dict
-        return self.__dict__.copy()
+def magic(n, k):
+    '''magic function that does some magic'''
+    res = 1
+    if (k > n - k):
+        k = n - k
+    for i in range(0, k):
+        res = res * (n - i)
+        res = res // (i + 1)
+    return res
